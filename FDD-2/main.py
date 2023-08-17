@@ -20,7 +20,7 @@ import scipy as sp
 Naxial  = 160
 Nradial = 95
 # Train_epoch_1 = 5000
-Train_epoch_2 = 1
+Train_epoch_2 = 10000
 
 def trainTestIndex(Nsamples,testSplit_ratio):
     # The following test index was generated randomly using np.random.permutation(172)[0:22]
@@ -205,7 +205,7 @@ if __name__ == "__main__":
     sensorPlacements      = np.load('optSensorPositionT_0999.npy')
 
     # index of training and test dataset
-    trainIndex, testIndex = trainTestIndex(Nsamples,testSplit_ratio=0.001)   
+    trainIndex, testIndex = trainTestIndex(Nsamples,testSplit_ratio=0.1)   
 
     # Subtract mean
     fields_sub   = {}
