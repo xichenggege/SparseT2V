@@ -20,7 +20,7 @@ import scipy as sp
 Naxial  = 160
 Nradial = 95
 # Train_epoch_1 = 5000
-Train_epoch_2 = 10000
+Train_epoch_2 = 1
 
 def trainTestIndex(Nsamples,testSplit_ratio):
     # The following test index was generated randomly using np.random.permutation(172)[0:22]
@@ -177,7 +177,7 @@ def plotTest(ref,pred,plotSensor,savefolder):
         axs[0].axis('equal')
         # Plot sensors
         if plotSensor == True:
-            axs[0].scatter(xmesh[1,sensorPlacements[:, 1]], ymesh[sensorPlacements[:, 0],1], c='r', s=5)
+            axs[0].scatter(xmesh.flatten()[sensorPlacements], ymesh.flatten()[sensorPlacements], c='r', s=5)
 
         axs[1].contourf(xmesh, ymesh, pred[:,count].reshape(Nradial,Naxial), \
                        cmap='jet', vmin = vmin, vmax = vmax)
@@ -205,7 +205,7 @@ if __name__ == "__main__":
     sensorPlacements      = np.load('optSensorPositionT_0999.npy')
 
     # index of training and test dataset
-    trainIndex, testIndex = trainTestIndex(Nsamples,testSplit_ratio=0.10)   
+    trainIndex, testIndex = trainTestIndex(Nsamples,testSplit_ratio=0.001)   
 
     # Subtract mean
     fields_sub   = {}
@@ -213,7 +213,6 @@ if __name__ == "__main__":
     for var in ['T','U']:
         fields_sub[var], fields_mean[var] = submean(fields[var])  
 
-    TS   = sensorSampling(fields_sub['T'][:, trainIndex], showTCgrid=True, savefolder='Figures/') # T sparse space
     # -------------------------------------------------------------------------
     # Run n times for each setup
     # -------------------------------------------------------------------------
@@ -222,9 +221,10 @@ if __name__ == "__main__":
         # Create folder to save each run results
         if os.path.exists(f'run{runIndex}') == False:
             os.mkdir(f'run{runIndex}')
-                # prepare folders
         if os.path.exists(f'run{runIndex}/pred') == False:
             os.mkdir(f'run{runIndex}/pred')
+        if os.path.exists(f'run{runIndex}/Figures') == False:
+            os.mkdir(f'run{runIndex}/Figures')
    
         # -------------------------------------------------------------------------
         # Part 1: U full space to U latent space by PCA
@@ -241,20 +241,20 @@ if __name__ == "__main__":
         UF  = d_U.output(d_U.input(fields_sub['U'][:, testIndex]))  + fields_mean['U'][:, testIndex]
 
         # Plot and save results
-        # if os.path.exists('Figures/UF2UL') == False:
-        # os.mkdir('Figures/UF2UL')
+        if os.path.exists(f'run{runIndex}/Figures/UF2UL') == False:
+            os.mkdir(f'run{runIndex}/Figures/UF2UL')
         ref   = fields['U'][:, testIndex]
         pred  = UF
-        # plotPCAComponents(d_U,savefolder = 'Figures/UF2UL/pcaComponent')
-        # plotTest(ref,pred,plotSensor=False,savefolder='Figures/UF2UL')
+        plotPCAComponents(d_U,savefolder = f'run{runIndex}/Figures/UF2UL/pcaComponent')
+        plotTest(ref,pred,plotSensor=False,savefolder=f'run{runIndex}/Figures/UF2UL')
         saveToMatlab_pca(d_U,savename=f'run{runIndex}/pred/TF2TL.mat')
 
         # -------------------------------------------------------------------------
         # Part 2: Mapping T sparse space to U latent space "TS2UL" 
         # -------------------------------------------------------------------------
         # F_NN2
-        # if os.path.exists('Figures/TS2UL') == False:
-        #     os.mkdir('Figures/TS2UL') 
+        if os.path.exists(f'run{runIndex}/Figures/TS2UL') == False:
+            os.mkdir(f'run{runIndex}/Figures/TS2UL') 
 
         # decode latent space  by PCA
         UL   = d_U.input(fields_sub['U'][:, trainIndex])     # U latent space
@@ -268,7 +268,7 @@ if __name__ == "__main__":
         # Training 'DNN' to build mapping from 'Tsensor' to PCA latent space ('pca_out')
         F_NN3.train( Xtrain = TS, Ytrain = UL, verbose=True)
         # Plot training history
-        # plotTrainHistory(F_NN3.history,savefolder='Figures/TS2UL')
+        plotTrainHistory(F_NN3.history,savefolder=f'run{runIndex}/Figures/TS2UL')
 
         # Save for matlab post-processing
         # Test data
@@ -285,12 +285,12 @@ if __name__ == "__main__":
         # Reconstruction: 
         # first mapping T sparse sensor data to T latent space
         # prediction
-        # if os.path.exists('Figures/TS2UF') == False:
-        #     os.mkdir('Figures/TS2UF') 
+        if os.path.exists(f'run{runIndex}/Figures/TS2UF') == False:
+            os.mkdir(f'run{runIndex}/Figures/TS2UF') 
         UF      = d_U.output(UL) + fields_mean['U'][:, testIndex]
         # Plot and save for matlab post-processing
         ref     = fields['U'][:, testIndex]
         pred    = UF
         # Plot and save results
-        # plotTest(ref,pred,plotSensor=True,savefolder='Figures/TS2UF')  
+        plotTest(ref,pred,plotSensor=True,savefolder=f'run{runIndex}/Figures/TS2UF')  
         saveToMatlab_dnn(testIndex, sensorPlacements, ref, pred,F_NN3.history, savename=f'run{runIndex}/pred/TS2UF.mat')
