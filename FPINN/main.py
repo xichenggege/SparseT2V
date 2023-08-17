@@ -20,7 +20,7 @@ def getData():
 
     dataLoc     = os.getcwd()
     case_name   = '20230627_PlaneJet2D_Benchmark_nonDimensonal.mat'
-    filePath    = f'{dataLoc[0:len(dataLoc)]}TrainData\\{case_name}'
+    filePath    = f'{dataLoc[0:len(dataLoc)]}\TrainData\\{case_name}'
 
     mat         = scipy.io.loadmat(filePath)
     Nsamples    = mat['T_'].shape[1]
@@ -109,6 +109,9 @@ if __name__ == "__main__":
 
     Nx = 160 
     Ny = 95
+
+    if os.path.exists('Figures') == False:
+        os.mkdir('Figures')
 
     # Preview your loaded data
     Ynp = Y
