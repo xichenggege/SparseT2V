@@ -9,9 +9,9 @@ The source code for SCOPE-1 paper X.Wang, Y.Chen et al. Flow reconstruction of s
 ## Installation guide
 1. Install Python 3
 2. Install generalRegressionFramework (https://github.com/YimengChankth/generalRegressionFramework.git). It is a general framework that contains *PCA*, *MLP* etc., and can call them in a same manner. This is not a public pacakage. To use:
-   2.1 Download as zip
-   2.2 Open Python cmd, change to your working environment, cd to the root of downloaded package
-   2.3 Type 'pip3 install -e .'
+   - Download as zip
+   - Open Python cmd, change to your working environment, cd to the root of downloaded package
+   - Type 'pip3 install -e .'
 4. Download training data (https://kth-my.sharepoint.com/:u:/g/personal/xicheng_ug_kth_se/EVbl54WaIzRPoBcmKBUFGCIB_5UmJnOvNv9ZSE9tAMi1iw?e=W7vaYr) and upzip them under and put all 3 group mat files under:**_.\TrainData_**
 5. Optional: install Matlab> vR2021b for post-processing
 
