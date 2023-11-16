@@ -1,14 +1,15 @@
 # SparseT2V: Reconstruct flow velocity through sparse temperature measurement
-The source code for SCOPE-1 paper X.Wang, Y.Chen et al. Flow reconstruction of single-phase planar jet from sparse temperature measurements (Under review).
+* The source code for SCOPE-1 paper [X.Wang, Y.Chen et al. Flow reconstruction of single-phase planar jet from sparse temperature measurements](https://www.researchgate.net/publication/375692666_Flow_reconstruction_of_single-phase_planar_jet_from_sparse_temperature_measurements).
+* [Presentation is avaliable](https://kth-my.sharepoint.com/:p:/r/personal/xicheng_ug_kth_se/Documents/Share/SparseT2V_data_for_SCOPE/20231115_Scope1_SparseT2V.pptx?d=w9ade6c1046264d6d9744b267068c5a16&csf=1&web=1&e=uuveda).
 
 ## System requirements
 1. The main function is written in Python 3.8.0 and tensorlfow 2.8.0. 
 2. Code for post-processing is written in Matlab (version R2021b).
-2. Training by GPU is enabled by: Tensorflow 2.8.0 + Python 3.8.0 and instructions in (https://towardsdatascience.com/how-to-finally-install-tensorflow-gpu-on-windows-10-63527910f255)
+2. Training by GPU is enabled by: Tensorflow 2.8.0 + Python 3.8.0, see [instructions](https://towardsdatascience.com/how-to-finally-install-tensorflow-gpu-on-windows-10-63527910f255)
 
 ## Installation guide
 1. Install Python 3
-2. Install generalRegressionFramework (https://github.com/YimengChankth/generalRegressionFramework.git). It is a general framework that contains *PCA*, *MLP* etc., and can call them in a same manner. This is not a public pacakage. To use:
+2. Install [generalRegressionFramework](https://github.com/YimengChankth/generalRegressionFramework.git). It is a general framework that contains *PCA*, *MLP* etc., and can call them in a same manner. This is not a public pacakage. To use:
    * Download as zip
    * Open Python cmd, change to your working environment, cd to the root of downloaded package
    * Type 'pip3 install -e .'
