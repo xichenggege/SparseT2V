@@ -1,6 +1,6 @@
 # SparseT2V: Reconstruct flow velocity through sparse temperature measurement
-* The source code for SCOPE-1 paper [X.Wang, Y.Chen et al. Flow reconstruction of single-phase planar jet from sparse temperature measurements](https://www.researchgate.net/publication/375692666_Flow_reconstruction_of_single-phase_planar_jet_from_sparse_temperature_measurements).
-* [Presentation is avaliable](https://kth-my.sharepoint.com/:p:/r/personal/xicheng_ug_kth_se/Documents/Share/SparseT2V_data_for_SCOPE/20231115_Scope1_SparseT2V.pptx?d=w9ade6c1046264d6d9744b267068c5a16&csf=1&web=1&e=uuveda).
+* The source code for Best Paper Award in SCOPE-1 titled [Flow reconstruction of single-phase planar jet from sparse temperature measurements](https://www.researchgate.net/publication/375692666_Flow_reconstruction_of_single-phase_planar_jet_from_sparse_temperature_measurements).
+* Presentation is [avaliable](https://kth-my.sharepoint.com/:p:/g/personal/xicheng_ug_kth_se/ERBs3pomRm1Nl0SyZwaMWhYBeBc3CmVCy4oWalvA26KZhg?e=kbAtTt).
 
 ## System requirements
 1. The main function is written in Python 3.8.0 and tensorlfow 2.8.0. 
@@ -13,7 +13,7 @@
    * Download as zip
    * Open Python cmd, change to your working environment, cd to the root of downloaded package
    * Type 'pip3 install -e .'
-4. Download training data (https://kth-my.sharepoint.com/:u:/g/personal/xicheng_ug_kth_se/EVbl54WaIzRPoBcmKBUFGCIB_5UmJnOvNv9ZSE9tAMi1iw?e=W7vaYr) and upzip them under and put all 3 group mat files under:**_.\TrainData_**
+4. Download [training data](https://kth-my.sharepoint.com/:u:/g/personal/xicheng_ug_kth_se/EVbl54WaIzRPoBcmKBUFGCIB_5UmJnOvNv9ZSE9tAMi1iw?e=W7vaYr) and upzip and put all 3 group mat files under:**_.\TrainData_**
 5. Optional: install Matlab> vR2021b for post-processing
 
 ## Requried libraries
