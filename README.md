@@ -72,6 +72,8 @@ and in **_.FPINN/PINN_PlaneJet_NoDimensonal.py_**
 ## Instructions for use
 1. The setup of parameters details for PCA and nerual networks class can be found in **_./generalRegressionFramework/PCA.py_** and **_./generalRegressionFramework/DNN.py**_
 
+## Acknowledgment 
+The PINNs code used in this work is revised from the version provided by Prof. Ricardo Vinuesa Motilva and Mr. Yuning Wang by their [paper](https://pubs.aip.org/aip/pof/article/34/7/075117/2847279).  
 
 ## Questions
 To get help on how to use the data or code, simply open an issue in the GitHub "Issues" section.
